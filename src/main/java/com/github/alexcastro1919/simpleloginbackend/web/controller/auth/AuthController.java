@@ -5,13 +5,13 @@ import com.github.alexcastro1919.simpleloginbackend.persistence.entity.user.key.
 import com.github.alexcastro1919.simpleloginbackend.persistence.mapper.UserMapper;
 import com.github.alexcastro1919.simpleloginbackend.persistence.service.user.UserAuthResult;
 import com.github.alexcastro1919.simpleloginbackend.persistence.service.user.UserService;
+import com.github.alexcastro1919.simpleloginbackend.web.payload.auth.LoginRequest;
+import com.github.alexcastro1919.simpleloginbackend.web.payload.auth.RegisterRequest;
 import com.github.alexcastro1919.simpleloginbackend.web.security.user.UserAuthUtil;
 import com.github.alexcastro1919.simpleloginbackend.web.security.user.UserSecurityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -27,7 +27,9 @@ public class AuthController {
     private UserSecurityManager userSecurityManager;
 
     @PostMapping("/login")
-    public ResponseEntity<UserKey> login(String email, String password) {
+    public ResponseEntity<UserKey> login(@RequestBody LoginRequest request) {
+        String email = request.email();
+        String password = request.password();
         UserAuthResult result = userService.auth(email, password);
 
         switch (result) {
@@ -45,14 +47,14 @@ public class AuthController {
         return ResponseEntity.status(500).build();
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<UserKey> register(String email, String password, String name, String lastName) {
-        if (userService.getByEmail(email) != null) {
+    @PostMapping(path = "/register")
+    public ResponseEntity<UserKey> register(@RequestBody RegisterRequest request) {
+        if (userService.getByEmail(request.getEmail()) != null) {
             return ResponseEntity.status(409).build();
         }
 
-        password = userAuthUtil.encodePassword(password);
-        User user = new User(email, password, name, lastName);
+        request.setPassword(userAuthUtil.encodePassword(request.getPassword()));
+        User user = new User(request.getEmail(), request.getPassword(), request.getName(), request.getLastName());
         userService.create(user);
 
         UserKey userKey = new UserKey(user.getId());
