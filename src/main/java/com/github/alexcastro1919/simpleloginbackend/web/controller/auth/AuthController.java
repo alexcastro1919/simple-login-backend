@@ -13,6 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
+/**
+ * Controller para trabajar con el login y el register de los usuarios.
+ */
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -26,6 +30,7 @@ public class AuthController {
     @Autowired
     private UserSecurityManager userSecurityManager;
 
+    @CrossOrigin(origins = "http://192.168.5.4:5500")
     @PostMapping("/login")
     public ResponseEntity<UserKey> login(@RequestBody LoginRequest request) {
         String email = request.email();
@@ -47,6 +52,7 @@ public class AuthController {
         return ResponseEntity.status(500).build();
     }
 
+    @CrossOrigin(origins = "http://192.168.5.4:5500")
     @PostMapping(path = "/register")
     public ResponseEntity<UserKey> register(@RequestBody RegisterRequest request) {
         if (userService.getByEmail(request.getEmail()) != null) {

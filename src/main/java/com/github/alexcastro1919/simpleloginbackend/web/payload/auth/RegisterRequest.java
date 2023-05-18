@@ -1,5 +1,8 @@
 package com.github.alexcastro1919.simpleloginbackend.web.payload.auth;
 
+/**
+ * Record para las solicitudes de register.
+ */
 public class RegisterRequest {
 
     private String email;

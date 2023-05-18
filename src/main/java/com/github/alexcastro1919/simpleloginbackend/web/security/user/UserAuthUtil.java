@@ -4,6 +4,9 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+/**
+ * Clase para encriptar contraseñas y comprobar si la contraseña coincide.
+ */
 @Component
 public class UserAuthUtil {
     private PasswordEncoder passwordEncoder;

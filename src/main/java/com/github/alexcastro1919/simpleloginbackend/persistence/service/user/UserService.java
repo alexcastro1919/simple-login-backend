@@ -7,6 +7,9 @@ import com.github.alexcastro1919.simpleloginbackend.web.security.user.UserAuthUt
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Servicio para hacer de intermediario a los usuarios.
+ */
 @Service
 public class UserService {
 

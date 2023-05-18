@@ -5,6 +5,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 
+
+/**
+ * Clase para gestionar sesiones.
+ */
 @Component
 public class UserSecurityManager {
 

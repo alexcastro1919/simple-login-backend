@@ -1,5 +1,8 @@
 package com.github.alexcastro1919.simpleloginbackend.domain.dto;
 
+/**
+ * Clase DTO de la clase User. Sirve para ocultar la contraseña.
+ */
 public class UserDTO {
 
     private String id;

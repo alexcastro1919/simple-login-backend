@@ -3,6 +3,9 @@ package com.github.alexcastro1919.simpleloginbackend.persistence.entity.auth;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.UUID;
 
+/**
+ * Objeto KEY, para gestionar las sesiones.
+ */
 public abstract class Key {
 
     private String key;

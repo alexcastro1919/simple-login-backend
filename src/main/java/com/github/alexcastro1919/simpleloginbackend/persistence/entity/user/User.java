@@ -3,6 +3,9 @@ package com.github.alexcastro1919.simpleloginbackend.persistence.entity.user;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * Objeto User. Sirve para poder guardarlo en la base de datos y trabajar con usuarios fácilmente.
+ */
 @Document(collection = "users")
 public class User {
 
